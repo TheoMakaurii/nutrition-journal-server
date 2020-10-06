@@ -13,12 +13,29 @@ const MealsService = {
         'Meals.protiens',)
       },
 
-  getById(db, id) {
-    return MealsService.getAllMeals(db)
-      .where('art.id', id)
+    logNewMeal(db, newMeal){
+        return db
+         .insert(newMeal)
+         .into('meals_table')
+         .returning('*')
+         .then(rows =>{
+             return rows[0]
+         })
+    },
+
+    getById(db, id) {
+    return db
+      .from('meals_table AS Meals')
+      .select('*')
+      .where({id})
       .first()
   },
 
+  deleteMeal(db, id) {
+    return db('meals_table')
+      .where({ id })
+      .delete()
+  },
 
 }
 module.exports = MealsService
