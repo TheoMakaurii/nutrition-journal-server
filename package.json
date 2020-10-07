@@ -1,10 +1,10 @@
 {
-  "name": "express-boilerplate",
+  "name": "nutrition-journal",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "deploy": "git push heroku master",
+    "deploy": "git push heroku main",
    "postdeploy": "npm run migrate:production",
     "test": "mocha --require test/setup.js",
     "dev": "nodemon src/server.js",
