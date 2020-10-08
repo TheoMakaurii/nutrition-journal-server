@@ -1,6 +1,6 @@
 const express = require('express')
 const MealsService = require('./meals-service')
-const BasicAuth  = require('../middleware/basic-auth')
+const JwtAuth  = require('../middleware/jwt-auth')
 
 
 const mealsRouter = express.Router()
@@ -8,7 +8,7 @@ const jsonParser= express.json();
 
 mealsRouter
     .route('/')
-    .all(BasicAuth)
+    .all(JwtAuth)
     .get((req, res, next)=>{
         const knexInstance = req.app.get('db')
         MealsService.getAllMeals(knexInstance)
@@ -41,7 +41,7 @@ mealsRouter
 
 mealsRouter
     .route('/:meal_id')
-    .all(BasicAuth)
+    .all(JwtAuth)
     .get((req, res, next)=>{
         const knexInstance= req.app.get('db')
         MealsService.getById(knexInstance, req.params.meal_id)

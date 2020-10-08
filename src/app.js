@@ -6,10 +6,11 @@ const helmet = require('helmet');
 const { NODE_ENV } = require('./config')
 const MealsService = require ('./meals/meals-service')
 const MealsRouter = require('./meals/meals-router')
+const authRouter = require('./auth/auth-router')
 
 const app = express();
 
-const jsonParser= express.json();
+// const jsonParser= express.json();
 
 const morganOption = (NODE_ENV === 'production')
   ? 'tiny'
@@ -20,6 +21,7 @@ app.use(helmet());
 app.use(cors());
 
 app.use('/api/meals', MealsRouter)
+app.use('/api/auth', authRouter)
 
 // app.get('/api/meals', (req, res, next)=>{
 //   const knexInstance = req.app.get('db')

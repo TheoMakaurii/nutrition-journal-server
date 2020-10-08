@@ -1,3 +1,4 @@
+
 const AuthService = require('../auth/auth-service')
 
 function requireAuth(req, res, next) {
@@ -25,13 +26,21 @@ function requireAuth(req, res, next) {
         tokenUserName
       )
         .then(user => {
-          if (!user || user.password !== tokenPassword) {
+          if (!user) {
             return res.status(401).json({ error: 'Who the hell are you!!' })
           }
+
+          return AuthService.comparePasswords(tokenPassword, user.password)
+            .then(passwordsMatch =>{
+              if(!passwordsMatch){
+                return res.status(401).json({ error: 'Passwords dont match!' })
+              }
+        
           
           req.user=user
           next()
         })
+      })
         .catch(next)
     }
   
