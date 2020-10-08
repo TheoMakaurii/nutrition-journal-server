@@ -4,7 +4,9 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config')
-const MealsService = require ('./meals-service')
+const MealsService = require ('./meals/meals-service')
+const MealsRouter = require('./meals/meals-router')
+
 const app = express();
 
 const jsonParser= express.json();
@@ -17,36 +19,38 @@ app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
 
-app.get('/api/meals', (req, res, next)=>{
-  const knexInstance = req.app.get('db')
-  MealsService.getAllMeals(knexInstance)
-    .then(data =>{
-      res.json(data)
-    })
-    .catch(next)
-})
-app.get('/', (req, res)=>{
-  res.send('what a good destination!');
-});
+app.use('/api/meals', MealsRouter)
 
-app.post('/api/meals', jsonParser, (req, res, next)=>{
-  const {meal_title, calories, fats, carbs, protiens} =req.body
-  const newMeal = {meal_title, calories, fats, carbs, protiens}
-  if(!meal_title){
-    return res.status(400).json({
-      error: {message: `Missing meal title!`}
-    })
-  }
-  MealsService.logNewMeal(
-    req.app.get('db'), newMeal)
-     .then(data=>{
-       res.status(201)
-       .location('/api/meals/${data.id}')
-       .json(data)
-     })
-     .catch(next)
+// app.get('/api/meals', (req, res, next)=>{
+//   const knexInstance = req.app.get('db')
+//   MealsService.getAllMeals(knexInstance)
+//     .then(data =>{
+//       res.json(data)
+//     })
+//     .catch(next)
+// })
+// app.get('/', (req, res)=>{
+//   res.send('what a good destination!');
+// });
+
+// app.post('/api/meals', jsonParser, (req, res, next)=>{
+//   const {meal_title, calories, fats, carbs, protiens} =req.body
+//   const newMeal = {meal_title, calories, fats, carbs, protiens}
+//   if(!meal_title){
+//     return res.status(400).json({
+//       error: {message: `Missing meal title!`}
+//     })
+//   }
+//   MealsService.logNewMeal(
+//     req.app.get('db'), newMeal)
+//      .then(data=>{
+//        res.status(201)
+//        .location('/api/meals/${data.id}')
+//        .json(data)
+//      })
+//      .catch(next)
   
-})
+// })
 
 app.get('/api/meals/:meal_id', (req, res, next)=>{
   const knexInstance= req.app.get('db')

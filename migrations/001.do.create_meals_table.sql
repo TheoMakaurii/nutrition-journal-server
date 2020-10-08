@@ -6,4 +6,5 @@ CREATE TABLE meals_table (
     carbs INTEGER,
     protiens INTEGER,
     date_published TIMESTAMPTZ DEFAULT now() NOT NULL
+
 );

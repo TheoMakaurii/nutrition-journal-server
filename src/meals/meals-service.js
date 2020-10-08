@@ -6,6 +6,7 @@ const MealsService = {
       .from('meals_table AS Meals')
       .select(
         'Meals.id',
+        'Meals.user_id',
         'Meals.meal_title',
         'Meals.calories',
         'Meals.fats',
