@@ -11,7 +11,8 @@ const MealsService = {
         'Meals.calories',
         'Meals.fats',
         'Meals.carbs',
-        'Meals.protiens',)
+        'Meals.protiens',
+      )
       },
 
     logNewMeal(db, newMeal){
@@ -24,12 +25,12 @@ const MealsService = {
          })
     },
 
-    getById(db, id) {
+    getById(db, user_id) {
     return db
       .from('meals_table AS Meals')
       .select('*')
-      .where({id})
-      .first()
+      .where({user_id})
+      
   },
 
   deleteMeal(db, id) {

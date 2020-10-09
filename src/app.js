@@ -7,6 +7,7 @@ const { NODE_ENV } = require('./config')
 const MealsService = require ('./meals/meals-service')
 const MealsRouter = require('./meals/meals-router')
 const authRouter = require('./auth/auth-router')
+const usersRouter = require('./users/users-router')
 
 const app = express();
 
@@ -22,6 +23,7 @@ app.use(cors());
 
 app.use('/api/meals', MealsRouter)
 app.use('/api/auth', authRouter)
+app.use('/api/users', usersRouter)
 
 // app.get('/api/meals', (req, res, next)=>{
 //   const knexInstance = req.app.get('db')
@@ -54,28 +56,28 @@ app.use('/api/auth', authRouter)
   
 // })
 
-app.get('/api/meals/:meal_id', (req, res, next)=>{
-  const knexInstance= req.app.get('db')
-  MealsService.getById(knexInstance, req.params.meal_id)
-   .then(data=>{
-     if(!data){
-       return res.status(404).json({
-         error:{message:`That meal isnt here!`}
-       })
-     }
-     res.json(data)
-   })
-   .catch(next)
-})
+// app.get('/api/meals/:meal_id', (req, res, next)=>{
+//   const knexInstance= req.app.get('db')
+//   MealsService.getById(knexInstance, req.params.meal_id)
+//    .then(data=>{
+//      if(!data){
+//        return res.status(404).json({
+//          error:{message:`That meal isnt here!`}
+//        })
+//      }
+//      res.json(data)
+//    })
+//    .catch(next)
+// })
 
-app.delete('/api/meals/:meal_id', (req, res, next)=>{
-  const knexInstance = req.app.get('db')
-    MealsService.deleteMeal(knexInstance, req.params.meal_id)
-     .then(affected =>{
-       res.status(204).end()
-     })
-     .catch(next)
-})
+// app.delete('/api/meals/:meal_id', (req, res, next)=>{
+//   const knexInstance = req.app.get('db')
+//     MealsService.deleteMeal(knexInstance, req.params.meal_id)
+//      .then(affected =>{
+//        res.status(204).end()
+//      })
+//      .catch(next)
+// })
 
 app.use(function errorHAndler(error, req, res, next){
     let response
