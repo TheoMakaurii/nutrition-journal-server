@@ -12,7 +12,9 @@ const MealsService = {
         'Meals.fats',
         'Meals.carbs',
         'Meals.protiens',
+        'Meals.date_published'
       )
+      
       },
 
     logNewMeal(db, newMeal){
@@ -28,8 +30,10 @@ const MealsService = {
     getById(db, user_id) {
     return db
       .from('meals_table AS Meals')
+      .orderBy('date_published', 'DESC')
       .select('*')
       .where({user_id})
+
       
   },
 
