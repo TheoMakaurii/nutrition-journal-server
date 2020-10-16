@@ -1,26 +1,22 @@
 
-# Node Boilerplate!
 
-basic boilerplate for any express programming I might do
+Welcome!
 
-## Some tips and tricks!
+This is the server repository for a handy mobile app to keep in your pocket(https://nutrition-journal.vercel.app/). The app should appeal to a wide community of people; from diabetics to bodybuilders. Whether the user's goal is weight loss, weight gain, or weight control my app is an essential tool. New users are able to create password protected accounts to archive their daily meals and macro-nutrient consumption. The app is streamlined for an easy user experience. No ads. No clutter.
+#
+#
+This app was designed to be extremely mobile-friendly and is therefore most appropriate for use on a smartphone or tablet. With this caveat in mind, you may demo the app on any browser. Please enjoy! Everything should be fairly self-explainatory and easy to use. 
+#
+#
+This is a fullstack JavaScript app. The client was built using React and the server was designed using Node. 
+#
+The client for this app is broken into several components, and make authorized fetch calls to the following URL 'https://gentle-brook-95294.herokuapp.com/api/'. The state is maintained and set in the App.js file, which is lowest common ancestor of the components that depend on its resources. User passwords are encrypted with bcrypt and stored as JWT on the server. Only the individual users can share credential info at their discretion. Authentication Tokens are held in local memory and cleared when the user signs out. This makes it possible to direct users to endpoints unique to their user-id. One user should not have access to another user's data without the appropriate login credentials.
+#
+Databases for the server where created and managed using PostgreSQL, and endpoints were fascillitated by the Express framework library. The current manifestation of this project depends on two database tables which directly reference eachother by a key relationship. 
+#
+#
+#
 
-Look over and complete the following steps to start a new project (call it whatever you like!):
-
-1. Clone this repository to your local machine `git clone https://github.com/TheoMakaurii/node-boilerplate.git YOUR-NEW-PROJECT-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with --> `rm -rf .git && git init`
-4. You will need to install the node dependencies --> `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
-
-## Scripts
-
-Start the application --> `npm start`
-
-Start nodemon for the application --> `npm run dev`
-
-Run the tests --> `npm test`
-
-Happy Hacking!!
+#
+--Please feel free to clone this git repository to your machine! Once the code has been cloned, just run the command 'npm install' to install the necessary dependancies/ libraries and then run 'npm start' to compile to code to your browser! Happy hacking!
 
