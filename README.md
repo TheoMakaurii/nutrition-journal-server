@@ -1,5 +1,9 @@
 
-Follow the link (https://nutrition-journal.vercel.app/) to explore the interface.
+Follow the link 
+#
+(https://nutrition-journal.vercel.app/) 
+#
+to explore the interface.
 
 Welcome!
 
@@ -7,7 +11,11 @@ This App is called "Let's Eat!", and it is a handy nutrition journal that fits i
 #
 This is a fullstack JavaScript app. The client was built using React and the server was designed using Node. 
 #
-The client for this app is broken into several components, and make authorized fetch calls to the following URL 'https://gentle-brook-95294.herokuapp.com/api/'. The state is maintained and set in the App.js file, which is lowest common ancestor of the components that depend on its resources. User passwords are encrypted with bcrypt and stored as JWT on the server. Only the individual users can share credential info at their discretion. Authentication Tokens are held in local memory and cleared when the user signs out. This makes it possible to direct users to endpoints unique to their user-id. One user should not have access to another user's data without the appropriate login credentials.
+The client for this app is broken into several components, and make authorized fetch calls to the following URL: 
+#
+'https://gentle-brook-95294.herokuapp.com/api/' 
+#
+The state is maintained and set in the App.js file, which is lowest common ancestor of the components that depend on its resources. User passwords are encrypted with bcrypt and stored as JWT on the server. Only the individual users can share credential info at their discretion. Authentication Tokens are held in local memory and cleared when the user signs out. This makes it possible to direct users to endpoints unique to their user-id. One user should not have access to another user's data without the appropriate login credentials.
 
 #
 ![Image of ER Diagram]
