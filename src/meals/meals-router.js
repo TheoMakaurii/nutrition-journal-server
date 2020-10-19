@@ -1,9 +1,9 @@
-const express = require('express')
-const MealsService = require('./meals-service')
-const JwtAuth  = require('../middleware/jwt-auth')
+const express = require('express');
+const MealsService = require('./meals-service');
+const JwtAuth  = require('../middleware/jwt-auth');
 
 
-const mealsRouter = express.Router()
+const mealsRouter = express.Router();
 const jsonParser= express.json();
 
 mealsRouter
@@ -36,7 +36,7 @@ mealsRouter
            })
            .catch(next)
         
-      })
+  });
 
 
 mealsRouter
@@ -54,7 +54,7 @@ mealsRouter
            res.json(data)
          })
          .catch(next)
-      })
+  });
 
 mealsRouter
     .route('/:meal_id')
@@ -66,6 +66,6 @@ mealsRouter
              res.status(204).end()
            })
            .catch(next)
-      })
+  });
 
-    module.exports = mealsRouter
+module.exports = mealsRouter;

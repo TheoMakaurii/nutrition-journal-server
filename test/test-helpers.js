@@ -1,11 +1,9 @@
-
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 function makeUsersArray(){
 
     return [
-
 
         {   
             id: 1,
@@ -77,9 +75,8 @@ function cleanTables(db) {
           meals_table,
           users_table`
       )
-
     )
-  }
+  };
 
   function makeMealFixtures() {
     const testUsers = makeUsersArray()
@@ -101,4 +98,4 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
     cleanTables,
     makeUsersArray,
     makeMealsArray,
-    makeMealFixtures}
+    makeMealFixtures};

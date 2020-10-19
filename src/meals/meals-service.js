@@ -1,5 +1,3 @@
-const xss = require('xss')
-
 const MealsService = {
   getAllMeals(db) {
     return db
@@ -13,9 +11,8 @@ const MealsService = {
         'Meals.carbs',
         'Meals.protiens',
         'Meals.date_published'
-      )
-      
-      },
+      )  
+    },
 
     logNewMeal(db, newMeal){
         return db
@@ -24,7 +21,7 @@ const MealsService = {
          .returning('*')
          .then(rows =>{
              return rows[0]
-         })
+        })
     },
 
     getById(db, user_id) {
@@ -33,8 +30,6 @@ const MealsService = {
       .orderBy('date_published', 'DESC')
       .select('*')
       .where({user_id})
-
-      
   },
 
   deleteMeal(db, id) {
@@ -43,5 +38,5 @@ const MealsService = {
       .delete()
   },
 
-}
-module.exports = MealsService
+};
+module.exports = MealsService;

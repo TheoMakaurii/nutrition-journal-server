@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
 
 const UsersService = {
 
@@ -33,4 +33,4 @@ const UsersService = {
       },
 }
 
-module.exports = UsersService
+module.exports = UsersService;

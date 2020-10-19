@@ -1,36 +1,26 @@
-const { expect } = require('chai')
-const knex = require('knex')
-const app = require('../src/app')
-const helpers = require('./test-helpers')
-const supertest = require('supertest')
+const { expect } = require('chai');
+const knex = require('knex');
+const app = require('../src/app');
+const helpers = require('./test-helpers');
+const supertest = require('supertest');
 
 describe('Nutrition Endpoints', function() {
-    let db
+    let db;
 
     before('make knex instance', () => {
       db = knex({
         client: 'pg',
         connection: process.env.TEST_DATABASE_URL,
-      })
+      });
       app.set('db', db)
-    })
+    });
   
-    after('disconnect from db', () => db.destroy())
+    after('disconnect from db', () => db.destroy());
 
-    before('cleanup', () => helpers.cleanTables(db))
+    before('cleanup', () => helpers.cleanTables(db));
 
-    afterEach('cleanup', () => helpers.cleanTables(db))
-  
-    // before('clean the table', () => db('users_table').truncate())
-
-    // before('clean the table', () => db('meals_table').truncate())
-
-    // afterEach('cleanup', () => db('users_table').truncate())
-
-    // afterEach('cleanup', () => db('meals_table').truncate())
+    afterEach('cleanup', () => helpers.cleanTables(db));
     
-   
-
     context('Given there meals in the database', () => {
 
         const testUsers=[
@@ -56,7 +46,7 @@ describe('Nutrition Endpoints', function() {
                     password: "password",
                     date_created: '2100-05-22T16:30:32.615Z'
                 },
-        ]
+        ];
 
         const testMeals = [ 
             { id :2,
@@ -91,27 +81,24 @@ describe('Nutrition Endpoints', function() {
                 date_published: '2100-05-22T16:30:32.615Z',
                 user_id: testUsers[2].id
                     }
-        
-
-        ]
+        ];
         beforeEach('insert users', () => {
             return db
               .into('users_table')
               .insert(testUsers)
-          })
+          });
 
         beforeEach('insert meals', () => {
           return db
             .into('meals_table')
             .insert(testMeals)
-        })
+        });
         it('GET /api/meals responds with 200 and all of the meals', () => {
              return supertest(app)
                .get('/api/meals')
                .set('Authorization', helpers.makeAuthHeader(testUsers[0]))
-               .expect(200,testMeals)
-               // TODO: add more assertions about the body
-           })
+               .expect(200,testMeals);
+           });
 
         it('GET /api/meals/:user_id responds with 200 and specific user meals', ()=>{
             const userId =1
@@ -124,13 +111,12 @@ describe('Nutrition Endpoints', function() {
                 protiens: 444,
                 date_published: '2100-05-22T16:28:32.615Z',
                 user_id: testUsers[0].id
-                
-                }]
+                }
+            ];
             return supertest(app)
                 .get(`/api/meals/${userId}`)
                 .set('Authorization', helpers.makeAuthHeader(testUsers[1]))
-                .expect(200, userMeal)
-        })
-
-      })
-  })
+                .expect(200, userMeal);
+        });
+    });
+});

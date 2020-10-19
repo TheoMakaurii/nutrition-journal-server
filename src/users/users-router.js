@@ -1,13 +1,12 @@
-const express = require('express')
-const UsersService = require('./users-service')
-const path = require('path')
-
-const usersRouter = express.Router()
-const jsonBodyParser = express.json()
+const express = require('express');
+const UsersService = require('./users-service');
+const path = require('path');
+const usersRouter = express.Router();
+const jsonBodyParser = express.json();
 
 usersRouter
   .post('/', jsonBodyParser, (req, res, next) => {
-    const { password, user_name, full_name, nickname } = req.body
+    const { password, user_name, full_name } = req.body;
 
     for (const field of ['full_name', 'user_name', 'password'])
       if (!req.body[field])
@@ -15,9 +14,7 @@ usersRouter
           error: `Missing '${field}' in request body`
         })
 
-    // TODO: check user_name doesn't start with spaces
-
-    const passwordError = UsersService.validatePassword(password)
+    const passwordError = UsersService.validatePassword(password);
 
     if (passwordError)
       return res.status(400).json({ error: passwordError })
@@ -51,6 +48,6 @@ usersRouter
           })
       })
       .catch(next)
-  })
+  });
 
-module.exports = usersRouter
+module.exports = usersRouter;
